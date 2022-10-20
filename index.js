@@ -1,3 +1,4 @@
+var fileGenerator = require("./fileGenerator");
 var fs = require('fs');
 var inquirer = require('inquirer');
 
@@ -9,7 +10,56 @@ let questions = [
         name: "title",
     }, {
         type: "input",
-        message: "What is the title of your repository?",
-        name: "title"
+        message: "Give a breif description of your project!",
+        name: "description",
+    }, {
+        type: "input",
+        message: "installation/test instructions?",
+        name: "install",
+    }, {
+        type: "confirm",
+        message: "Contributions?",
+        name: "contributions",
+        options: [
+            "yes",
+            "no",
+        ]
+    }, {
+        type: "input",
+        message: "If yes then who?",
+        name: "contributions2",
+    }, {
+        type: "list",
+        message: "What are the lincenses?",
+        name: "license",
+        choices: [
+            "MIT",
+            new inquirer.Separator(),
+            "none",
+        ]
+    }, {
+        type: "input",
+        message: "Github username?",
+        name: "userName",
+    }, {
+        type: "input",
+        message: "Questions?",
+        name: "gitProfile",
+    }, {
+        type: "input",
+        message: "Email?",
+        name: "email",
     }
-]
+];
+
+
+inquirer.prompt(questions).then(function (response) {
+    console.log(response);
+
+    var content = fileGenerator(response);
+    console.log(content);
+    fs.writeFile("./ReadMe.md", content, function (err) {
+        if (err) throw err
+        console.log("sucess");
+    });
+});
