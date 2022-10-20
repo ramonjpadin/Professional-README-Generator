@@ -1,4 +1,4 @@
-var fileGenerator = require("./fileGenerator");
+var fileGenerator = require("./fileGenerator").default;
 var fs = require('fs');
 var inquirer = require('inquirer');
 
@@ -12,6 +12,10 @@ let questions = [
         type: "input",
         message: "Give a breif description of your project!",
         name: "description",
+    }, {
+        type: "input",
+        message: "motivation?",
+        name: "motivation",
     }, {
         type: "input",
         message: "installation/test instructions?",
@@ -43,7 +47,7 @@ let questions = [
         name: "userName",
     }, {
         type: "input",
-        message: "Questions?",
+        message: "Github profile?",
         name: "gitProfile",
     }, {
         type: "input",
